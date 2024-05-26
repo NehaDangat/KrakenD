@@ -1,0 +1,11 @@
+# Stage 1: Build the application
+FROM maven:3.8.4-openjdk-11-slim AS build
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN mvn package -DskipTests
+
+# Stage 2: Create the runtime image
+FROM openjdk:11-jre-slim
+COPY --from=build /usr/src/app/target/quarkus-app/quarkus-run.jar /app/quarkus-run.jar
+EXPOSE 9090
+ENTRYPOINT ["java", "-jar", "/app/quarkus-run.jar"]

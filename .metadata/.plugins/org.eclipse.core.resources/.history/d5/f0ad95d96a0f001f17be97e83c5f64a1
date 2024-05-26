@@ -1,0 +1,11 @@
+package com.hdfc.quarkus.repository;
+
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+
+import javax.enterprise.context.ApplicationScoped;
+
+import com.hdfc.quarkus.entity.User;
+
+@ApplicationScoped
+public class UserRepository implements PanacheRepository<User> {
+}
